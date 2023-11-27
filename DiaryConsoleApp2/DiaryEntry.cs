@@ -8,7 +8,8 @@ namespace DiaryConsoleApp2
 {
     public class DiaryEntry
     {
-        public int Id { get; set; } // 一意のID
+        // 一意のID
+        public int Id { get; set; }
         //日付
         public DateTime Date { get; set; }
         //内容

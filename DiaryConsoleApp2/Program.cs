@@ -13,8 +13,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        //CSVファイルから日記を読み込む
         var diaryEntries = LoadDiaryEntriesFromCsv(args.Length > 0 ? args[0] : "diary.csv");
 
+        //メニューの表示選択
         while (true)
         {
             PrintMenu();
@@ -45,15 +47,19 @@ class Program
                     SaveAndExit("diary.csv", diaryEntries);
                     break;
                 default:
-                    Console.WriteLine("無効な選択です。もう一度お試しください。");
+                    Console.WriteLine("無効な選択です。もう一度お試しください。\r\n");
                     break;
             }
         }
     }
 
+    /// <summary>
+    /// メニューの表示
+    /// </summary>
     static void PrintMenu()
     {
-        Console.WriteLine("日記アプリケーション");
+        Console.WriteLine("< 日記アプリケーション　メニュー >");
+        Console.WriteLine("使用する機能の数字を入力してください。");
         Console.WriteLine("1. 新しい日記を追加");
         Console.WriteLine("2. 日記を表示");
         Console.WriteLine("3. 日記を編集");
@@ -63,8 +69,12 @@ class Program
         Console.WriteLine("7. 終了");
     }
 
+    /// <summary>
+    /// 日記の追加
+    /// </summary>
     static void AddDiaryEntry(List<DiaryEntry> entries)
     {
+        //新しいIDの採番
         int maxId = entries.Count > 0 ? entries.Max(entry => entry.Id) : 0;
         int newId = maxId + 1;
 
@@ -73,16 +83,19 @@ class Program
         if (entry != null)
         {
             entries.Add(entry);
-            Console.WriteLine("日記が追加されました。");
+            Console.WriteLine("日記が追加されました。\r\n");
         }
     }
 
+    /// <summary>
+    /// 日記データの作成
+    /// </summary>
     public static DiaryEntry CreateDiaryEntry(int newId)
     {
         Console.WriteLine("日付を入力してください (yyyy/MM/dd):");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
         {
-            Console.WriteLine("無効な日付形式です。");
+            Console.WriteLine("無効な日付形式です。\r\n");
             return null;
         }
 
@@ -90,26 +103,26 @@ class Program
         string content = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(content))
         {
-            Console.WriteLine("日記の内容が無効です。日記は登録されません。");
+            Console.WriteLine("日記の内容が無効です。日記は登録されません。\r\n");
             return null;
         }
 
         return new DiaryEntry { Id = newId, Date = date, Content = content };
     }
 
+    /// <summary>
+    /// 日記の表示
+    /// </summary>
     static void DisplayDiaryEntries(List<DiaryEntry> entries)
     {
-        entries.OrderBy(entry => entry.Date);
-
         Console.WriteLine("日記一覧:");
-        foreach (var entry in entries)
-        {
-            Console.WriteLine($"（{entry.Id}）日付: {entry.Date.ToShortDateString()}");
-            Console.WriteLine(entry.Content);
-            Console.WriteLine();
-        }
+
+        DisplayEntries(entries);
     }
 
+    /// <summary>
+    /// 日記の編集
+    /// </summary>
     static void EditDiaryEntry(List<DiaryEntry> entries)
     {
         Console.WriteLine("編集する日記のIDを入力してください:");
@@ -125,24 +138,27 @@ class Program
 
                 if (string.IsNullOrWhiteSpace(content))
                 {
-                    Console.WriteLine("日記の内容が無効です。日記は登録されません。");
+                    Console.WriteLine("日記の内容が無効です。日記は登録されません。\r\n");
                     return;
                 }
 
                 entryToEdit.Content = content;
-                Console.WriteLine($"日記 ID {editEntryId} が編集されました。");
+                Console.WriteLine($"日記 ID {editEntryId} が編集されました。\r\n");
             }
             else
             {
-                Console.WriteLine("指定したIDの日記が見つかりませんでした。");
+                Console.WriteLine("指定したIDの日記が見つかりませんでした。\r\n");
             }
         }
         else
         {
-            Console.WriteLine("無効なIDが入力されました。");
+            Console.WriteLine("無効なIDが入力されました。\r\n");
         }
     }
 
+    /// <summary>
+    /// 日記の削除
+    /// </summary>
     static void DeleteDiaryEntry(List<DiaryEntry> entries)
     {
         Console.WriteLine("削除する日記のIDを入力してください:");
@@ -153,19 +169,22 @@ class Program
             if (entryToDelete != null)
             {
                 entries.Remove(entryToDelete);
-                Console.WriteLine($"日記 ID {entryId} が削除されました。");
+                Console.WriteLine($"日記 ID {entryId} が削除されました。\r\n");
             }
             else
             {
-                Console.WriteLine("指定したIDの日記が見つかりませんでした。");
+                Console.WriteLine("指定したIDの日記が見つかりませんでした。\r\n");
             }
         }
         else
         {
-            Console.WriteLine("無効なIDが入力されました。");
+            Console.WriteLine("無効なIDが入力されました。\r\n");
         }
     }
 
+    /// <summary>
+    /// 日記の日付検索
+    /// </summary>
     static void SearchByDateRange(List<DiaryEntry> entries)
     {
         Console.WriteLine("検索開始日を入力してください (yyyy/MM/dd):");
@@ -180,24 +199,28 @@ class Program
 
                 if (matchingEntries.Count == 0)
                 {
-                    Console.WriteLine("指定した日付範囲内の日記は見つかりませんでした。");
+                    Console.WriteLine("指定した日付範囲内の日記は見つかりませんでした。\r\n");
                 }
                 else
                 {
-                    DisplayMatchingEntries(startDate, endDate, matchingEntries);
+                    Console.WriteLine($"日記一覧（{startDate.ToShortDateString()}-{endDate.ToShortDateString()}）:");
+                    DisplayEntries(matchingEntries);
                 }
             }
             else
             {
-                Console.WriteLine("無効な日付形式です。");
+                Console.WriteLine("無効な日付形式です。\r\n");
             }
         }
         else
         {
-            Console.WriteLine("無効な日付形式です。");
+            Console.WriteLine("無効な日付形式です。\r\n");
         }
     }
 
+    /// <summary>
+    /// 日記の内容検索
+    /// </summary>
     static void SearchByText(List<DiaryEntry> entries)
     {
         Console.WriteLine("検索するテキストを入力してください:");
@@ -209,83 +232,50 @@ class Program
 
             if (matchingEntries.Count == 0)
             {
-                Console.WriteLine($"指定したテキスト「{searchText}」を含む日記は見つかりませんでした。");
+                Console.WriteLine($"指定したテキスト「{searchText}」を含む日記は見つかりませんでした。\r\n");
             }
             else
             {
-                DisplayMatchingEntries(searchText, matchingEntries);
+                Console.WriteLine($"日記一覧（「{searchText}」を含む）:");
+                DisplayEntries(matchingEntries);
             }
         }
         else
         {
-            Console.WriteLine("検索テキストが無効です。");
+            Console.WriteLine("検索テキストが無効です。\r\n");
         }
     }
 
-    static void DisplayMatchingEntries(DateTime startDate, DateTime endDate, List<DiaryEntry> matchingEntries)
-    {
-        Console.WriteLine($"日記（{startDate.ToShortDateString()}-{endDate.ToShortDateString()}）:");
-        DisplayEntries(matchingEntries);
-    }
 
-    static void DisplayMatchingEntries(string searchText, List<DiaryEntry> matchingEntries)
+    /// <summary>
+    /// 検索結果の表示
+    /// </summary>
+    static void DisplayEntries(List<DiaryEntry> entries)
     {
-        Console.WriteLine($"日記（「{searchText}」を含む）:");
-        DisplayEntries(matchingEntries, true, searchText);
-    }
+        //日付の昇順に並び変える
+        entries= entries.OrderBy(entry => entry.Date).ToList();
 
-    static void DisplayEntries(List<DiaryEntry> entries, bool highlight = false, string searchText = "")
-    {
         foreach (var entry in entries)
         {
-            Console.WriteLine($"日付: {entry.Date.ToShortDateString()}");
-            if (highlight)
-            {
-                HighlightAndPrintText(entry.Content, searchText);
-            }
-            else
-            {
-                Console.WriteLine(entry.Content);
-            }
+            Console.WriteLine($"（{entry.Id}）日付: {entry.Date.ToShortDateString()}");
+            Console.WriteLine(entry.Content);
             Console.WriteLine();
         }
     }
 
-    //検索した文字を赤くして出力する処理
-    public static void HighlightAndPrintText(string text, string searchTerm)
-    {
-        int startIndex = 0;
-
-        while (true)
-        {
-            int index = text.IndexOf(searchTerm, startIndex, StringComparison.OrdinalIgnoreCase);
-
-            if (index == -1)
-            {
-                Console.Write(text.Substring(startIndex));
-                break;
-            }
-
-            Console.Write(text.Substring(startIndex, index - startIndex));
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(text.Substring(index, searchTerm.Length));
-            Console.ResetColor();
-
-            startIndex = index + searchTerm.Length;
-        }
-
-        Console.WriteLine();
-    }
-
+    /// <summary>
+    /// CSVファイルに保存、アプリを終了
+    /// </summary>
     static void SaveAndExit(string filePath, List<DiaryEntry> entries)
     {
         SaveDiaryEntriesToCsv(filePath, entries);
-        Console.WriteLine("アプリケーションを終了します。");
+        Console.WriteLine("アプリケーションを終了します。\r\n");
         Environment.Exit(0);
     }
 
-    //CSVファイル保存処理
+    /// <summary>
+    /// CSVファイルに保存
+    /// </summary>
     public static void SaveDiaryEntriesToCsv(string filePath, List<DiaryEntry> entries)
     {
         using (var writer = new StreamWriter(filePath))
@@ -295,7 +285,9 @@ class Program
         }
     }
 
-    //CSVファイル読み込み処理
+    /// <summary>
+    /// CSVファイルから日記データを読み込み、リストに追加
+    /// </summary>
     public static List<DiaryEntry> LoadDiaryEntriesFromCsv(string filePath)
     {
         if (File.Exists(filePath))
