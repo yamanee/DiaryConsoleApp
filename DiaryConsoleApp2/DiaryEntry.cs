@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DiaryConsoleApp2
+﻿namespace DiaryConsoleApp1_Answer
 {
     public class DiaryEntry
     {
@@ -14,5 +8,7 @@ namespace DiaryConsoleApp2
         public DateTime Date { get; set; }
         //内容
         public string Content { get; set; }
+        //カテゴリ
+        public string Category { get; set; }
     }
 }
