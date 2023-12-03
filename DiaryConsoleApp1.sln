@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryConsoleApp1", "DiaryConsoleApp1\DiaryConsoleApp1.csproj", "{F5F44B2A-0FA8-45F3-8B9A-994C0EA191EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryConsoleApp1_Answer", "DiaryConsoleApp2\DiaryConsoleApp1_Answer.csproj", "{9706C63F-04E9-4AAE-A915-A1DF8BA98F62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryConsoleApp1_Answer", "DiaryConsoleApp1_Answer\DiaryConsoleApp1_Answer.csproj", "{9706C63F-04E9-4AAE-A915-A1DF8BA98F62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
