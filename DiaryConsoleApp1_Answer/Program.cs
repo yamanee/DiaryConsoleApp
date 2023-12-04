@@ -111,7 +111,7 @@ namespace DiaryConsoleApp1_Answer
                 Console.WriteLine("カテゴリは必須入力です。\r\n");
                 return null;
             }
-            else if (!Regex.IsMatch(category ?? "", RegexPatterns.CATEGORY_REGEX))
+            else if (!CommonValidation.IsAlphaNumeric(category))
             {
                 Console.WriteLine("半角英数を入力してください。\r\n");
                 return null;
