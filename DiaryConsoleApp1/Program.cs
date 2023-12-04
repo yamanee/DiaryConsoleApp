@@ -23,6 +23,7 @@ namespace DiaryConsoleApp1
                 Environment.Exit(1);
             }
 
+            //【小門１】Function1～Function7について、何をする関数か分かりやすいように名前を付け直してください。
             //メニューの表示選択
             while (true)
             {
@@ -106,6 +107,7 @@ namespace DiaryConsoleApp1
                 return null;
             }
 
+            //【小門３】日記の追加時に行っているカテゴリの半角英数字チェックを、正規表現で行うよう修正してください。
             Console.WriteLine("カテゴリを入力してください (半角英数字):");
             string category = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(category))
@@ -236,7 +238,7 @@ namespace DiaryConsoleApp1
                         Console.WriteLine($"日記一覧（{startDate.ToShortDateString()}-{endDate.ToShortDateString()}）:");
 
                         //日付の昇順に並び変える
-                        entries = entries.OrderBy(entry => entry.Date).ToList();
+                        entries = matchingEntries.OrderBy(entry => entry.Date).ToList();
 
                         foreach (var entry in entries)
                         {
