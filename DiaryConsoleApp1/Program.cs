@@ -107,7 +107,9 @@ namespace DiaryConsoleApp1
                 return null;
             }
 
+
             //【小門３】日記の追加時に行っているカテゴリの半角英数字チェックを、正規表現で行うよう修正してください。
+
             Console.WriteLine("カテゴリを入力してください (半角英数字):");
             string category = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(category))
@@ -115,7 +117,7 @@ namespace DiaryConsoleApp1
                 Console.WriteLine("カテゴリは必須入力です。\r\n");
                 return null;
             }
-            else if (Constant.ContainsNonAlphanumeric(category))
+            else if (!CommonValidation.IsAlphaNumeric(category))
             {
                 Console.WriteLine("半角英数を入力してください。\r\n");
                 return null;
