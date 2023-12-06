@@ -23,7 +23,8 @@ namespace DiaryConsoleApp1
                 Environment.Exit(1);
             }
 
-            //【小門１】Function1～Function7について、何をする関数か分かりやすいように名前を付け直してください。
+            //【小門１】Function1～Function7について、何をするメソッドか分かりやすいように名前を付け直してください。
+
             //メニューの表示選択
             while (true)
             {
