@@ -74,7 +74,7 @@ namespace DiaryConsoleApp1
             Console.WriteLine("4. 日記を削除");
             Console.WriteLine("5. 日付検索");
             Console.WriteLine("6. 内容検索");
-            Console.WriteLine("7. 終了");
+            Console.WriteLine("7. 保存して終了");
         }
 
         /// <summary>
