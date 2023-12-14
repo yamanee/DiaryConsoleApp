@@ -7,13 +7,15 @@ namespace DiaryConsoleApp1_Answer
 {
     class Program
     {
+        const string CSV_FILENAME = "../../../diary.csv";
+
         static void Main(string[] args)
         {
             //CSVファイルから日記を読み込む
             var diaryEntries = new List<DiaryEntry>();
             try
             {
-                diaryEntries = LoadDiaryEntriesFromCsv(args.Length > 0 ? args[0] : "diary.csv");
+                diaryEntries = LoadDiaryEntriesFromCsv(args.Length > 0 ? args[0] : CSV_FILENAME);
             }
             catch (Exception ex)
             {
@@ -49,7 +51,7 @@ namespace DiaryConsoleApp1_Answer
                         SearchByText(diaryEntries);
                         break;
                     case "7":
-                        SaveAndExit("diary.csv", diaryEntries);
+                        SaveAndExit(CSV_FILENAME, diaryEntries);
                         break;
                     default:
                         Console.WriteLine("無効な選択です。もう一度お試しください。\r\n");
@@ -71,7 +73,7 @@ namespace DiaryConsoleApp1_Answer
             Console.WriteLine("4. 日記を削除");
             Console.WriteLine("5. 日付検索");
             Console.WriteLine("6. 内容検索");
-            Console.WriteLine("7. 終了");
+            Console.WriteLine("7. 保存して終了");
         }
 
         /// <summary>

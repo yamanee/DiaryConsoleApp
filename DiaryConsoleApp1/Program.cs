@@ -7,7 +7,7 @@ namespace DiaryConsoleApp1
 {
     class Program
     {
-        const string CSV_FILENAME = "diary.csv";
+        const string CSV_FILENAME = "../../../diary.csv";
 
         static void Main(string[] args)
         {
@@ -23,7 +23,8 @@ namespace DiaryConsoleApp1
                 Environment.Exit(1);
             }
 
-            //【小門１】Function1～Function7について、何をする関数か分かりやすいように名前を付け直してください。
+            //【小問１】Function1～Function7について、何をするメソッドか分かりやすいようにメソッド名を付け直してください。
+
             //メニューの表示選択
             while (true)
             {
@@ -74,7 +75,7 @@ namespace DiaryConsoleApp1
             Console.WriteLine("4. 日記を削除");
             Console.WriteLine("5. 日付検索");
             Console.WriteLine("6. 内容検索");
-            Console.WriteLine("7. 終了");
+            Console.WriteLine("7. 保存して終了");
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace DiaryConsoleApp1
             }
 
 
-            //【小門３】日記の追加時に行っているカテゴリの半角英数字チェックを、正規表現で行うよう修正してください。
+            //【小問３】日記の追加時に行っているカテゴリの半角英数字チェックを、正規表現で行うよう修正してください。
 
             Console.WriteLine("カテゴリを入力してください (半角英数字):");
             string category = Console.ReadLine();
@@ -133,6 +134,9 @@ namespace DiaryConsoleApp1
 
             return new DiaryEntry { Id = newId, Date = date, Category = category, Content = content };
         }
+
+        //【小問２】 "2.日記を表示"、"5.日付検索"、"6.内容検索"において日記の表示を行っていますが、表示方法がそれぞれ異なります。
+        // "2.日記を表示"のときの表示方法に統一してください。
 
         /// <summary>
         /// 2. 日記を表示
