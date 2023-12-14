@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace DiaryConsoleApp1_Answer
 {
-    class Program
+    class Program_Answer
     {
         const string CSV_FILENAME = "../../../diary.csv";
 
