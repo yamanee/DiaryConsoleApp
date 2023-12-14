@@ -7,7 +7,7 @@ namespace DiaryConsoleApp1_Answer
 {
     class Program
     {
-        const string CSV_FILENAME = "diary.csv";
+        const string CSV_FILENAME = "../../../diary.csv";
 
         static void Main(string[] args)
         {
